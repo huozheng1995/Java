@@ -1,4 +1,4 @@
-package com.testDV;
+package com.dv;
 
 import cdata.jdbc.queryfederation.IFederationConnectionFactory;
 
