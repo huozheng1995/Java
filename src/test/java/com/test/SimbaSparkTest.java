@@ -50,17 +50,18 @@ public class SimbaSparkTest {
     String proxy = "UseProxy=1;ProxyHost=localhost;ProxyPort=10809;" +
         "ProxyAuth=1;ProxyUID=edwardh@kasoftware.cn;ProxyPWD=Hz123456@;";
 
-    String common = "jdbc:spark://community.cloud.databricks.com:443/default;" +
-        "transportMode=http;ssl=1;httpPath=sql/protocolv1/o/8525358545619462/0218-022049-creed169;" +
-        "AuthMech=3;UID=edwardh@kasoftware.cn;PWD=Hz123456@";
+    String common = "jdbc:spark://adb-4285190665808897.17.azuredatabricks.net:443/default;" +
+      "transportMode=http;ssl=1;httpPath=sql/protocolv1/o/4285190665808897/0315-183142-soy69;" +
+      "AuthMech=3;UID=token;PWD=dapic509524a0e419789da04206b2636fbbc-2";
 
     Connection conn = DriverManager.getConnection(common);
 
-    Tools.print(conn.getMetaData().getTables(null, "db_huo", null, null));
+//    Tools.print(conn.getMetaData().getTables(null, "db_huo", null, null));
 
     Tools.print(conn.getMetaData().getColumns(null, "db_huo", "family", null));
 
     ResultSet resultSet = conn.createStatement().executeQuery("select * from db_huo.family");
+    Tools.print(resultSet);
 
   }
 }

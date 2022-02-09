@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @description: 移位
@@ -35,6 +36,7 @@ public class DemoTableSize {
 
     tableSizeFor(10);
     getBitInInt(-16);
+
   }
 
   @Test
@@ -115,11 +117,25 @@ public class DemoTableSize {
   }
 
   //取double每一位的实际值
-  static final void getBitInDouble(double num) {
+  @Test
+  public void getBitInDouble() {
+    double num = 1.2139999866;
     System.out.println(num + "的每一位分别是：");
     long long1 = Double.doubleToRawLongBits(num);
     String result = Long.toBinaryString(long1);
     System.out.println(result);
+
+    int count = 64 - result.length();
+    StringBuilder builder = new StringBuilder();
+    for(int i=0; i<count; i++) {
+      builder.append("0");
+    }
+    builder.append(result);
+    result = builder.toString();
+    for(int i=0; i<8; i++) {
+      System.out.print(result.substring(i*8, (i*8) + 8) + " ");
+    }
+    System.out.println();
   }
 
   //取刚好大于等于cap的2的整数次方

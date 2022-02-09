@@ -8,14 +8,9 @@ import java.sql.Statement;
 
 public class Test {
   public static void main(String[] args) throws Exception{
-    Class.forName("com.cloudera.impala.jdbc.Driver");
-    String connectionString = "jdbc:impala://172.16.85.133:21050/myhive";
-    Connection connection = DriverManager.getConnection(connectionString);
-    Statement statement = connection.createStatement();
-
-    Tools.print(connection.getMetaData().getColumns(null,null,"family2",null));
-    Tools.print(statement.executeQuery("select * from family2;"));
-//    Tools.print(statement.executeQuery("select name, friends.ITEM, children.KEY from family, family.friends, family.children;"));
+    if(null instanceof Integer) {
+      int a = 1;
+    }
 
   }
 
