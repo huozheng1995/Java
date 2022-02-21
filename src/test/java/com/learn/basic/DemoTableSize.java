@@ -25,17 +25,25 @@ public class DemoTableSize {
 //    return ((a >> 31) ^ (b >> 31)) == 0;
 
   public static void main(String[] args) {
-    System.out.println(0b1101);
-    System.out.println(011);
-    System.out.println(-2 >> 1);
-    System.out.println(-2 >>> 1);
-    System.out.println(Math.pow(9, 1.0 / 2));
-    getBitInInt(20);
-    getBitInInt(-20);
-    getBitInInt(-20 >>> 2);
-
-    tableSizeFor(10);
-    getBitInInt(-16);
+//    System.out.println(0b1101);
+//    System.out.println(011);
+//    System.out.println(-2 >> 1);
+//    System.out.println(-2 >>> 1);
+//    System.out.println(Math.pow(9, 1.0 / 2));
+//    getBitInInt(35);
+//    getBitInInt2(35);
+//    getBitInInt(-20);
+//    getBitInInt(-20 >>> 2);
+//
+//    tableSizeFor(10);
+//    getBitInInt(-16);
+    int size = 35;
+    byte[] bytes = new byte[4];
+    bytes[0] = (byte)(size);
+    bytes[1] = (byte)(0xFF & size);
+    bytes[2] = (byte)(0xFF & (size >>> 8));
+    bytes[3] = (byte)(0xFF & (size >>> 16));
+    getBitInBytes(bytes);
 
   }
 
@@ -84,20 +92,16 @@ public class DemoTableSize {
     System.out.println(byteBuffer.getLong());
   }
 
-  public void getBitInBytes(byte[] bytes) {
-    StringBuffer sb = new StringBuffer();
+  public static void getBitInBytes(byte[] bytes) {
     for (int i = 0; i < bytes.length; i++) {
-      sb.append((bytes[i] >> 7) & 0x1)
-          .append((bytes[i] >> 6) & 0x1)
-          .append((bytes[i] >> 5) & 0x1)
-          .append((bytes[i] >> 4) & 0x1)
-          .append((bytes[i] >> 3) & 0x1)
-          .append((bytes[i] >> 2) & 0x1)
-          .append((bytes[i] >> 1) & 0x1)
-          .append((bytes[i] >> 0) & 0x1);
-      sb.append(" ");
+      byte b = bytes[i];
+      System.out.println(b + "的每一位分别是：");
+      for (int j = 0; j < 8; j++) {
+        int t = (b >>> (7 - j)) & 0x01;
+        System.out.print(t);
+      }
+      System.out.println();
     }
-    System.out.println(sb.toString());
   }
 
   //取十进制数每一位的实际值
@@ -105,6 +109,15 @@ public class DemoTableSize {
     System.out.println(num + "的每一位分别是：");
     for (int i = 0; i < 32; i++) {
       int t = (num & 0x80000000 >>> i) >>> (31 - i);
+      System.out.print(t);
+    }
+    System.out.println();
+  }
+
+  static final void getBitInInt2(int num) {
+    System.out.println(num + "的每一位分别是：");
+    for (int i = 0; i < 32; i++) {
+      int t = (num >>> (31 - i)) & 0x01;
       System.out.print(t);
     }
     System.out.println();

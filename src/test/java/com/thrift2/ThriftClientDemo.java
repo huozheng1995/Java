@@ -16,6 +16,7 @@ public class ThriftClientDemo {
       TestQry.Client client = new TestQry.Client(protocol);
       QryResult result = client.qryTest(DEFAULT_QRY_CODE);
       System.out.println("code=" + result.code + " msg=" + result.msg);
+      tTransport.close();
     } catch (Exception e) {
       e.printStackTrace();
     }
