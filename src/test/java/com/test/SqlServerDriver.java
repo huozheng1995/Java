@@ -10,9 +10,22 @@ import java.sql.*;
 public class SqlServerDriver extends TestCase {
 
   public static Connection getConnection() throws Exception {
-    String connectionUrl = "jdbc:sqlserver://192.168.100.1:1433;database=EdwardH;user=sa;password=xA123456;";
+    String connectionUrl = "jdbc:sqlserver://172.16.85.138:1433;database=test;user=sa;password=xA123456;";
     Connection connection = DriverManager.getConnection(connectionUrl);
     return connection;
+  }
+
+  public void test() throws Exception {
+    Connection conn = getConnection();
+
+//      ResultSet tables = conn.getMetaData().getTables(null, "dbo", null, null);
+//      Tools.print(tables);
+//      ((SQLConnection)conn).testConnection();
+    ResultSet resultSet = conn.createStatement().executeQuery("select * from t_time WHERE id = 1");
+    while (resultSet.next()) {
+//      System.out.println(resultSet.getObject(2));
+      System.out.println(resultSet.getString(2));
+    }
   }
 
   public void test_call_SSS_indexed() throws Exception {

@@ -69,11 +69,18 @@ public class MysqlDriver {
   @Test
   public void testExec() throws Exception {
     Class.forName("com.mysql.cj.jdbc.Driver");
-    Connection conn = DriverManager.getConnection("jdbc:mysql://" +
-        "172.16.85.138:3306/huo?user=root&password=123456&useSSL=false"
+    Connection connection = DriverManager.getConnection("jdbc:mysql://" +
+        "172.16.85.138:3306/cdc_src?user=root&password=123456&useSSL=false"
     );
 
 
+    Tools.print(connection.getMetaData().getColumns(null,null,"t_datatype", null));
+    ResultSet resultSet = connection.createStatement().executeQuery("select * from t_datatype");
+    int type = resultSet.getType();
+    Tools.print(resultSet.getMetaData());
+    Tools.print(resultSet);
+
+    connection.close();
   }
 
 
