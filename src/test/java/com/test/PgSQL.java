@@ -22,7 +22,7 @@ public class PgSQL {
       "jdbc:postgresql://172.16.85.138:5432/postgres", "postgres", "xA123456"
     );
 
-    Tools.print(connection.createStatement().execute("delete from t_copy2"));
+    connection.createStatement().execute("delete from t_copy2");
     Tools.print(connection.createStatement().executeQuery("select * from t_copy2"));
 
     CopyManager copyman = new CopyManager((BaseConnection) connection);

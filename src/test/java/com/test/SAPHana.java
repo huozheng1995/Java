@@ -11,7 +11,7 @@ public class SAPHana {
   public static Connection getConnection() throws Exception {
     Class.forName("com.sap.db.jdbc.Driver");
     Connection conn = DriverManager.getConnection(
-      "jdbc:sap://192.168.100.4:39017/?encrypt=true&validateCertificate=false", "SYSTEM", "xA123456");
+      "jdbc:sap://192.168.100.4:39017/?encrypt=true&validateCertificate=false&encrypt=false", "SYSTEM", "xA123456");
 
     return conn;
   }
@@ -20,9 +20,19 @@ public class SAPHana {
   public void testTables() throws Exception {
     Connection connection = getConnection();
     Tools.print(connection.getMetaData().getTableTypes());
-    Tools.print(connection.getMetaData().getTables(null, "SYS", null, null));
+    Tools.print(connection.getMetaData().getTables(null, null, "T_INDEX", null));
 //    Tools.print(connection.getMetaData().getColumns(null, "SYS", "RESULT_CACHE", null));
     connection.close();
+  }
+
+  @Test
+  public void testIndexes() throws Exception {
+    Connection connection = getConnection();
+
+    Tools.print(connection.getMetaData().getIndexInfo(null, null, "T_INDEX", false, true));
+    Tools.print(connection.getMetaData().getIndexInfo(null, null, "T_INDEX", false, false));
+    Tools.print(connection.getMetaData().getIndexInfo(null, null, "T_INDEX", true, true));
+    Tools.print(connection.getMetaData().getIndexInfo(null, null, "T_INDEX", true, false));
   }
 
 
