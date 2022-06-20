@@ -93,6 +93,17 @@
 			<artifactId>jdbc</artifactId>
 			<version>4.50.8</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-core</artifactId>
+			<version>1.19</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-generator-annprocess</artifactId>
+			<version>1.19</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
